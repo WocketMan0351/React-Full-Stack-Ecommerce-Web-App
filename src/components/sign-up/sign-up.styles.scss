@@ -1,0 +1,16 @@
+.sign-up {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+
+  .title {
+    margin: 10px 0;
+    display: flex;
+  }
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  margin: 0 50px;
+}
