@@ -14,7 +14,7 @@ export const createCharge = async (total, cartItems, currentUser) => {
     customer_name: `${currentUser.displayName}`,
     customer_email: `${currentUser.email}`,
     notif_email: `${currentUser.email}`,
-    success_url: 'http://localhost:3000/checkout',
+    success_url: 'https://cwrn-clothing-2022.herokuapp.com/checkout',
     order_id: `${currentUser.address}`,
   };
 
