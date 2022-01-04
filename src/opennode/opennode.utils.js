@@ -10,7 +10,7 @@ export const createCharge = async (total, cartItems, currentUser) => {
       ' - ' +
       `${cartItems.map((item) => '(' + item.quantity + 'x) ' + item.name)}`,
     amount: total,
-    currency: 'USD', //  UNCOMMENT TO GET TOTAL IN USD NOT SATS
+    // currency: 'USD', //  UNCOMMENT TO GET TOTAL IN USD NOT SATS
     customer_name: `${currentUser.displayName}`,
     customer_email: `${currentUser.email}`,
     notif_email: `${currentUser.email}`,
