@@ -5,7 +5,7 @@ import './sign-in.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth } from '../../firebase/firebase.utils';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -27,6 +27,7 @@ class SignIn extends React.Component {
       this.setState({ email: '', password: '' });
     } catch (error) {
       console.error(error);
+      alert('Invalid username and/or password.');
     }
   };
 
@@ -59,11 +60,8 @@ class SignIn extends React.Component {
             required
           />
           <div className='buttons'>
-            <CustomButton type='submit' value='Submit'>
+            <CustomButton type='submit' value='Submit' isBlue>
               Sign In
-            </CustomButton>
-            <CustomButton onClick={signInWithGoogle} type='button' isGoogleSignIn>
-              Sign In with Google
             </CustomButton>
           </div>
         </form>

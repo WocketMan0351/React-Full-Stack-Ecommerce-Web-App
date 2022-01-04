@@ -14,6 +14,7 @@ class SignUp extends React.Component {
     this.state = {
       displayName: '',
       email: '',
+      address: '',
       password: '',
       confirmPassword: '',
     };
@@ -28,7 +29,7 @@ class SignUp extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { displayName, email, password, confirmPassword } = this.state;
+    const { displayName, email, address, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
       alert("passwords don't match");
@@ -38,21 +39,23 @@ class SignUp extends React.Component {
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
 
-      await createUserProfileDocument(user, { displayName });
+      await createUserProfileDocument(user, { displayName, address });
 
       this.setState({
         displayName: '',
         email: '',
+        address: '',
         password: '',
         confirmPassword: '',
       });
     } catch (error) {
       console.error(error);
+      alert('There was a problem creating your account. Please try again.');
     }
   };
 
   render() {
-    const { displayName, email, password, confirmPassword } = this.state;
+    const { displayName, email, address, password, confirmPassword } = this.state;
 
     return (
       <div className='sign-up'>
@@ -64,7 +67,7 @@ class SignUp extends React.Component {
             type='text'
             value={displayName}
             onChange={this.handleChange}
-            label='Display Name'
+            label='First and Last Name'
             required
           />
           <FormInput
@@ -76,12 +79,21 @@ class SignUp extends React.Component {
             required
           />
           <FormInput
+            name='address'
+            type='address'
+            value={address}
+            onChange={this.handleChange}
+            label='Shipping address'
+            required
+          />
+          <FormInput
             name='password'
             type='password'
             value={password}
             onChange={this.handleChange}
             label='Password'
             required
+            autoComplete='new-password'
           />
           <FormInput
             name='confirmPassword'
