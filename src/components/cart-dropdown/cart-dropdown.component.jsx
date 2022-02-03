@@ -5,8 +5,9 @@ import { withRouter } from 'react-router-dom';
 
 import './cart-dropdown.styles.scss';
 
-import CustomButton from '../custom-button/custom-button.component';
-import CartItem from '../cart-item/cart-item.component';
+import CustomButton from '../custom-button/custom-button.component.jsx';
+import CartItem from '../cart-item/cart-item.component.jsx';
+
 import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 

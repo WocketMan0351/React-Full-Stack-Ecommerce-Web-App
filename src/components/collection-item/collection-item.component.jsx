@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import './collection-item.styles.scss';
 
-import CustomButton from '../custom-button/custom-button.component';
+import CustomButton from '../custom-button/custom-button.component.jsx';
+
 import { addItem } from '../../redux/cart/cart.actions';
 
 const CollectionItem = ({ item, addItem }) => {
@@ -14,7 +15,7 @@ const CollectionItem = ({ item, addItem }) => {
       <div className='image' style={{ backgroundImage: `url(${imageUrl})` }} />
       <div className='collection-footer'>
         <span className='name'> {name} </span>
-        <span className='price'> ${price} </span>
+        <span className='price'> {price}</span>
       </div>
       <CustomButton inverted onClick={() => addItem(item)}>
         Add to cart

@@ -4,8 +4,9 @@ import { createStructuredSelector } from 'reselect';
 
 import './checkout.styles.scss';
 
-import CheckoutItem from '../../components/checkout-item/checkout-item.component';
-import CustomButton from '../../components/custom-button/custom-button.component';
+import CheckoutItem from '../../components/checkout-item/checkout-item.component.jsx';
+import CustomButton from '../../components/custom-button/custom-button.component.jsx';
+
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
@@ -34,7 +35,7 @@ const CheckoutPage = ({ cartItems, total, currentUser, history }) => (
     {cartItems.map((cartItem) => (
       <CheckoutItem key={cartItem.id} cartItem={cartItem} />
     ))}
-    <div className='total'>TOTAL: ${total}</div>
+    <div className='total'>TOTAL: {total} sats</div>
     <div className='buttons-container'>
       {currentUser ? (
         <div>

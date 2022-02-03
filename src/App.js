@@ -5,16 +5,17 @@ import { createStructuredSelector } from 'reselect';
 
 import './App.css';
 
-import HomePage from './pages/homepage/homepage.component';
-import ShopPage from './pages/shop/shop.component';
-import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import CheckoutPage from './pages/checkout/checkout.component';
-import Header from './components/header/header-component';
-import ContactPage from './pages/contact/contact.component';
+import HomePage from './pages/homepage/homepage.component.jsx';
+import ShopPage from './pages/shop/shop.component.jsx';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component.jsx';
+import CheckoutPage from './pages/checkout/checkout.component.jsx';
+import Header from './components/header/header-component.jsx';
+import ContactPage from './pages/contact/contact.component.jsx';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
+import { selectCartItemsCount } from './redux/cart/cart.selectors';
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -54,9 +55,16 @@ class App extends React.Component {
           <Route
             exact
             path='/signin'
-            render={() =>
-              this.props.currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />
-            }
+            render={() => {
+              if (this.props.currentUser) {
+                if (this.props.currentCartItems > 0) {
+                  return <Redirect to='/checkout' />;
+                }
+                return <Redirect to='/' />;
+              } else {
+                return <SignInAndSignUpPage />;
+              }
+            }}
           />
           <Route exact path='/checkout' component={CheckoutPage} />
         </Switch>
@@ -67,6 +75,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  currentCartItems: selectCartItemsCount,
 });
 
 const mapDispatchToProps = (dispatch) => ({
