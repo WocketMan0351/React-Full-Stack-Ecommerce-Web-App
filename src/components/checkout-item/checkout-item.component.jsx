@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { clearItemFromCart } from '../../redux/cart/cart.actions';
 import { removeItem, addItem } from '../../redux/cart/cart.actions';
-
 import {
   CheckoutItemContainer,
   ImageContainer,

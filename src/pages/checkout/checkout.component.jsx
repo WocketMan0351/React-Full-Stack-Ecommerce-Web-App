@@ -2,41 +2,45 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import './checkout.styles.scss';
-
 import CheckoutItem from '../../components/checkout-item/checkout-item.component.jsx';
 import CustomButton from '../../components/custom-button/custom-button.component.jsx';
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
 
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-
 import { createCharge } from '../../opennode/opennode.utils';
-import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
+import {
+  ButtonsContainer,
+  CheckoutHeaderContainer,
+  CheckoutPageContainer,
+  HeaderBlockContainer,
+  TotalContainer,
+} from './checkout.styles';
 
 const CheckoutPage = ({ cartItems, total, currentUser, history }) => (
-  <div className='checkout-page'>
-    <div className='checkout-header'>
-      <div className='header-block'>
+  <CheckoutPageContainer>
+    <CheckoutHeaderContainer>
+      <HeaderBlockContainer>
         <span>Product</span>
-      </div>
-      <div className='header-block'>
+      </HeaderBlockContainer>{' '}
+      <HeaderBlockContainer>
         <span>Description</span>
-      </div>
-      <div className='header-block'>
+      </HeaderBlockContainer>{' '}
+      <HeaderBlockContainer>
         <span>Quantity</span>
-      </div>
-      <div className='header-block'>
+      </HeaderBlockContainer>{' '}
+      <HeaderBlockContainer>
         <span>Price</span>
-      </div>
-      <div className='header-block'>
+      </HeaderBlockContainer>{' '}
+      <HeaderBlockContainer>
         <span>Remove</span>
-      </div>
-    </div>
+      </HeaderBlockContainer>{' '}
+    </CheckoutHeaderContainer>{' '}
     {cartItems.map((cartItem) => (
       <CheckoutItem key={cartItem.id} cartItem={cartItem} />
     ))}
-    <div className='total'>TOTAL: {total} sats</div>
-    <div className='buttons-container'>
+    <TotalContainer>TOTAL: {total} sats</TotalContainer>
+    <ButtonsContainer>
       {currentUser ? (
         <div>
           <div className='button'>
@@ -44,9 +48,9 @@ const CheckoutPage = ({ cartItems, total, currentUser, history }) => (
               Pay with bitcoin
             </CustomButton>
           </div>
-          {/* <div className='button'>
+          <div className='button'>
             <StripeCheckoutButton className='stripe' total={total} />
-          </div> */}
+          </div>
         </div>
       ) : (
         <div className='button'>
@@ -55,8 +59,8 @@ const CheckoutPage = ({ cartItems, total, currentUser, history }) => (
           </CustomButton>
         </div>
       )}
-    </div>
-  </div>
+    </ButtonsContainer>{' '}
+  </CheckoutPageContainer>
 );
 
 const mapStateToProps = createStructuredSelector({

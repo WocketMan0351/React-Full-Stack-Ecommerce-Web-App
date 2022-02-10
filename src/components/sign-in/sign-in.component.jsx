@@ -1,11 +1,10 @@
 import React from 'react';
 
-import './sign-in.styles.scss';
-
 import FormInput from '../form-input/form-input.component.jsx';
 import CustomButton from '../custom-button/custom-button.component.jsx';
 
 import { auth } from '../../firebase/firebase.utils';
+import { ButtonsBarContainer, SignInContainer, TitleContainer } from './sign-in.styles';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -40,8 +39,8 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div className='sign-in'>
-        <h2 className='title'>Already have an account?</h2>
+      <SignInContainer>
+        <TitleContainer>Already have an account?</TitleContainer>
         <span>Sign in with your email and password</span>
         <form onSubmit={this.handleSubmit}>
           <FormInput
@@ -60,13 +59,13 @@ class SignIn extends React.Component {
             label='Password'
             required
           />
-          <div className='buttons'>
+          <ButtonsBarContainer>
             <CustomButton type='submit' value='Submit' isBlue>
               Sign In
             </CustomButton>
-          </div>
+          </ButtonsBarContainer>{' '}
         </form>
-      </div>
+      </SignInContainer>
     );
   }
 }
